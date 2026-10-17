@@ -86,7 +86,7 @@ void	flag_orchestator(t_stack *a, t_stack *b)
 		benchmark(a->bench, disorder);
 		return ;
 	}
-	if (a->total_nodes <= 5)
+	if (a->total_nodes <= 5 && (a->bench->mode == 0 || a->bench->mode == 4))
 	{
 		set_strategy(a->bench, "Small sort", "O(1)");
 		small_sort(a, b);
