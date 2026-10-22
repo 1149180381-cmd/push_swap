@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   fill_nodes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xinyu <xinyu@student.42malaga.com>         +#+  +:+       +#+        */
+/*   By: apaniagu <apaniagu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 13:04:52 by xinyu             #+#    #+#             */
-/*   Updated: 2026/10/08 13:04:56 by xinyu            ###   ########.fr       */
+/*   Updated: 2026/10/19 10:23:00 by apaniagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "push_swap.h"
 
 #include "push_swap.h"
 

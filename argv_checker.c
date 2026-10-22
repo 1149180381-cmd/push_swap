@@ -1,16 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argv_num_checker.c                                 :+:      :+:    :+:   */
+/*   argv_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apaniagu <apaniagu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 11:37:08 by xinyu             #+#    #+#             */
-/*   Updated: 2026/10/08 13:44:43 by apaniagu         ###   ########.fr       */
+/*   Updated: 2026/10/20 09:49:56 by apaniagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "push_swap.h"
 
 #include "push_swap.h"
 
@@ -45,6 +43,8 @@ static void	parse_flag(char *flag, t_bench *bench, int *dif, int *bflag)
 		(*bflag)++;
 		bench->enabled = 1;
 	}
+	else if (!ft_strncmp(flag, "--count-only", 42))
+		bench->print = 0;
 	else
 		write_error();
 	if (*dif > 1 || *bflag > 1)
@@ -58,6 +58,8 @@ static void	check_dups(int i, int argc, char **argv)
 	j = i;
 	while (++j < argc)
 	{
+		if (argv[j][0] == '-' && argv[j][1] == '-' && ft_isalpha(argv[j][2]))
+			continue ;
 		if (!ft_str_is_num(argv[j]))
 			write_error();
 		if (ft_atoi_mod(argv[i]) == ft_atoi_mod(argv[j]))
@@ -77,13 +79,13 @@ void	ft_argv_checker(int argc, char **argv, t_bench *bench)
 	while (i++ < (argc - 1))
 	{
 		if (argv[i][0] == '-' && argv[i][1] == '-' && ft_isalpha(argv[i][2]))
-		{
 			parse_flag(argv[i], bench, &dif_flag, &bench_flag);
-			continue ;
+		else
+		{
+			if (!ft_str_is_num(argv[i]))
+				write_error();
+			check_dups(i, argc, argv);
 		}
-		if (!ft_str_is_num(argv[i]))
-			write_error();
-		check_dups(i, argc, argv);
 	}
 }
 

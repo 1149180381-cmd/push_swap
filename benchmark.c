@@ -14,10 +14,9 @@
 
 static void	print_header(int fd, t_bench *bench, double disorder)
 {
-	ft_putstr_fd("=== BENCHMARK ===\n", fd);
-	ft_putstr_fd("Disorder: ", fd);
+	ft_putstr_fd("[bench] disorder:  ", fd);
 	put_percent_2(fd, disorder);
-	ft_putstr_fd("Strategy: ", fd);
+	ft_putstr_fd("[bench] strategy:  ", fd);
 	ft_putstr_fd(bench->strategy_name, fd);
 	ft_putstr_fd(" / ", fd);
 	ft_putstr_fd(bench->complexity, fd);
@@ -36,27 +35,37 @@ static void	print_total(int fd, t_bench *bench)
 		total += bench->op_count[i];
 		i++;
 	}
-	ft_putstr_fd("Total operations: ", fd);
+	ft_putstr_fd("[bench] total_ops:  ", fd);
 	ft_putnbr_fd(total, fd);
 	ft_putstr_fd("\n", fd);
 }
 
+static void	printer_ops(const char **names, int *i, int fd, t_bench *bench)
+{
+	ft_putstr_fd(names[*i], fd);
+	ft_putstr_fd(":  ", fd);
+	ft_putnbr_fd(bench->op_count[*i], fd);
+	ft_putstr_fd("  ", fd);
+	*i += 1;
+}
+
 static void	print_ops(int fd, t_bench *bench)
 {
-	char	*names[OP_COUNT];
-	int		i;
+	const char	*names[OP_COUNT] = {
+		"sa", "sb", "ss", "pa", "pb", "ra",
+		"rb", "rr", "rra", "rrb", "rrr"
+	};
+	int			i;
 
 	i = 0;
-	names = {"sa", "sb", "ss", "pa", "pb", "ra",
-		"rb", "rr", "rra", "rrb", "rrr"};
+	ft_putstr_fd("[bench] ", fd);
+	while (i < 5)
+		printer_ops(names, &i, fd, bench);
+	ft_putstr_fd("\n", fd);
+	ft_putstr_fd("[bench] ", fd);
 	while (i < OP_COUNT)
-	{
-		ft_putstr_fd(names[i], fd);
-		ft_putstr_fd(": ", fd);
-		ft_putnbr_fd(bench->op_count[i], fd);
-		ft_putstr_fd("\n", fd);
-		i++;
-	}
+		printer_ops(names, &i, fd, bench);
+	ft_putstr_fd("\n", fd);
 }
 
 void	benchmark(t_bench *bench, double disorder)

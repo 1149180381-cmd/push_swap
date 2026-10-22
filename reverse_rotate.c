@@ -6,7 +6,7 @@
 /*   By: apaniagu <apaniagu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 11:39:26 by apaniagu          #+#    #+#             */
-/*   Updated: 2026/10/15 11:44:28 by apaniagu         ###   ########.fr       */
+/*   Updated: 2026/10/21 14:08:04 by apaniagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	rra(t_stack *a)
 		return ;
 	base_reverse_rotate(a);
 	count_movements(a, OP_RRA);
-	ft_printf("rra\n");
+	if (a->bench->print)
+		ft_printf("rra\n");
 }
 
 void	rrb(t_stack *b)
@@ -27,7 +28,8 @@ void	rrb(t_stack *b)
 		return ;
 	base_reverse_rotate(b);
 	count_movements(b, OP_RRB);
-	ft_printf("rrb\n");
+	if (b->bench->print)
+		ft_printf("rrb\n");
 }
 
 void	rrr(t_stack *a, t_stack *b)
@@ -37,5 +39,6 @@ void	rrr(t_stack *a, t_stack *b)
 	base_reverse_rotate(a);
 	base_reverse_rotate(b);
 	count_movements(a, OP_RRR);
-	ft_printf("rrr\n");
+	if (a->bench->print)
+		ft_printf("rrr\n");
 }

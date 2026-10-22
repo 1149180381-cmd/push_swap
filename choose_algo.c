@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_flag.c                                       :+:      :+:    :+:   */
+/*   choose_algo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaniagu <apaniagu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: xinyu <xinyu@student.42malaga.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/14 12:28:46 by xinyu             #+#    #+#             */
-/*   Updated: 2026/10/15 10:38:33 by apaniagu         ###   ########.fr       */
+/*   Created: 2026/10/22 13:34:15 by xinyu             #+#    #+#             */
+/*   Updated: 2026/10/22 13:34:19 by xinyu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	flag_orchestator(t_stack *a, t_stack *b)
 	}
 	if (a->total_nodes <= 5 && (a->bench->mode == 0 || a->bench->mode == 4))
 	{
-		set_strategy(a->bench, "Small sort", "O(1)");
+		set_strategy(a->bench, "Small", "O(1)");
 		small_sort(a, b);
 	}
 	else

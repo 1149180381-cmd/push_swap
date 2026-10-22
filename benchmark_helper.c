@@ -54,6 +54,7 @@ void	init_bench(t_bench *bench)
 	bench->mode = 0;
 	bench->strategy_name = "Unknown";
 	bench->complexity = "Unknown";
+	bench->print = 1;
 	i = 0;
 	while (i < OP_COUNT)
 	{

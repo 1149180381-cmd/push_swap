@@ -6,12 +6,12 @@
 /*   By: apaniagu <apaniagu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 11:11:00 by apaniagu          #+#    #+#             */
-/*   Updated: 2026/10/09 13:56:42 by apaniagu         ###   ########.fr       */
+/*   Updated: 2026/10/20 09:57:15 by apaniagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//cambia los 2 primeros nodos de la lista
+
 void	base_swap(t_stack *stack)
 {
 	t_node	*first;
@@ -27,7 +27,6 @@ void	base_swap(t_stack *stack)
 	if (!first->next)
 		stack->bottom = first;
 }
-//coge el primer node de src y lo pone primero en dst
 
 void	base_push(t_stack *dst, t_stack *src)
 {
@@ -46,7 +45,6 @@ void	base_push(t_stack *dst, t_stack *src)
 	src->total_nodes -= 1;
 	dst->total_nodes += 1;
 }
-// el primero pasa a ser el ultimo
 
 void	base_rotate(t_stack *stack)
 {
@@ -62,7 +60,6 @@ void	base_rotate(t_stack *stack)
 	first->next = NULL;
 	stack->bottom = first;
 }
-// El último nodo pasa a ser el primero
 
 void	base_reverse_rotate(t_stack *stack)
 {

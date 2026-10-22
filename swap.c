@@ -6,7 +6,7 @@
 /*   By: apaniagu <apaniagu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 14:59:49 by xinyu             #+#    #+#             */
-/*   Updated: 2026/10/15 11:40:56 by apaniagu         ###   ########.fr       */
+/*   Updated: 2026/10/21 14:08:10 by apaniagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	sa(t_stack *a)
 		return ;
 	base_swap(a);
 	count_movements(a, OP_SA);
-	ft_printf("sa\n");
+	if (a->bench->print)
+		ft_printf("sa\n");
 }
 
 void	sb(t_stack *b)
@@ -27,7 +28,8 @@ void	sb(t_stack *b)
 		return ;
 	base_swap(b);
 	count_movements(b, OP_SB);
-	ft_printf("sb\n");
+	if (b->bench->print)
+		ft_printf("sb\n");
 }
 
 void	ss(t_stack *a, t_stack *b)
@@ -39,5 +41,6 @@ void	ss(t_stack *a, t_stack *b)
 	base_swap(a);
 	base_swap(b);
 	count_movements(a, OP_SS);
-	ft_printf("ss\n");
+	if (a->bench->print)
+		ft_printf("ss\n");
 }

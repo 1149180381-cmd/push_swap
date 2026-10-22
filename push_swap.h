@@ -50,6 +50,7 @@ typedef struct s_bench
 {
 	int			enabled;
 	int			mode;
+	int			print;
 	long		op_count[OP_COUNT];
 	const char	*strategy_name;
 	const char	*complexity;
@@ -67,6 +68,10 @@ int		ft_atoi_mod(const char *str);
 int		is_sorted(t_stack *a);
 int		get_bit(int index, int bit);
 int		find_index_position(t_stack *stack, int i);
+char	**ft_split_mod(char const *s, char c, int *argc);
+void	clear_argv(int argc, char **argv);
+void	init_stacks(t_stack *a, t_stack *b, t_bench *bench);
+char	*filter_argv(int argc, char **argv);
 void	put_percent_2(int fd, double disorder);
 void	small_sort(t_stack *a, t_stack *b);
 void	count_movements(t_stack *s, int op_id);
