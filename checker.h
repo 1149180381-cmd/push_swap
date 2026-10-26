@@ -22,4 +22,7 @@
 void	init_bench_bonus(t_bench *bench);
 size_t	ft_zero2nl(char const *str, char c);
 char	*get_next_line(int fd);
+int		process_line(char **line, t_stack *a, t_stack *b);
+int		execute_op(char *line, t_stack *a, t_stack *b);
+void	starter(int *argc, char ***argv, t_bench *bench);
 #endif

@@ -17,11 +17,18 @@ int	main(int argc, char **argv)
 	t_stack	a;
 	t_stack	b;
 	t_bench	bench;
+	char	*unsplited;
 
-	argv = ft_split_mod(filter_argv(argc, argv), ' ', &argc);
+	unsplited = filter_argv(argc, argv);
+	argv = ft_split_mod(unsplited, ' ', &argc);
+	free(unsplited);
 	init_bench(&bench);
+	if (!ft_argv_checker(argc, argv, &bench))
+	{
+		clear_argv(argc, argv);
+		write_error();
+	}
 	init_stacks(&a, &b, &bench);
-	ft_argv_checker(argc, argv, &bench);
 	fill_nodes(argc, argv, &a);
 	index_stack(&a);
 	flag_orchestator(&a, &b);

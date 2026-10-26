@@ -14,7 +14,7 @@
 
 static int	execute_op2(char *line, t_stack *a, t_stack *b);
 
-static int	execute_op(char *line, t_stack *a, t_stack *b)
+int	execute_op(char *line, t_stack *a, t_stack *b)
 {
 	int	len;
 
@@ -31,7 +31,7 @@ static int	execute_op(char *line, t_stack *a, t_stack *b)
 		pa(a, b);
 	else if (!ft_strncmp(line, "pb", 3))
 		pb(a, b);
-	else if (execute_op2(line, a, b) == 0)
+	else if (!execute_op2(line, a, b))
 		return (0);
 	return (1);
 }
@@ -55,13 +55,12 @@ static int	execute_op2(char *line, t_stack *a, t_stack *b)
 	return (1);
 }
 
-static void	clear_n_free_bonus(char *line, t_stack *a, t_stack *b)
+static void	clean_n_error(t_stack *a, t_stack *b, int argc, char **argv)
 {
-	free(line);
+	clear_argv(argc, argv);
 	clear_nodes(a);
 	clear_nodes(b);
 	write_error();
-	exit(1);
 }
 
 static void	finishing(t_stack *a, t_stack *b, int argc, char **argv)
@@ -82,20 +81,16 @@ int	main(int argc, char **argv)
 	t_bench	bench;
 	char	*line;
 
-	argv = ft_split_mod(filter_argv(argc, argv), ' ', &argc);
-	ft_argv_checker(argc, argv, &bench);
-	init_bench_bonus(&bench);
+	if (argc == 1)
+		return (0);
+	starter(&argc, &argv, &bench);
 	init_stacks(&a, &b, &bench);
 	fill_nodes(argc, argv, &a);
 	index_stack(&a);
 	line = get_next_line(0);
 	while (line != NULL)
-	{
-		if (!execute_op(line, &a, &b))
-			clear_n_free_bonus(line, &a, &b);
-		free(line);
-		line = get_next_line(0);
-	}
+		if (!process_line(&line, &a, &b))
+			clean_n_error(&a, &b, argc, argv);
 	finishing(&a, &b, argc, argv);
 	return (0);
 }

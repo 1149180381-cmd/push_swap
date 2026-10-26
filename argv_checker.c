@@ -29,7 +29,7 @@ static void	parse_mode(char *flag, t_bench *bench, int *matched)
 		*matched = 0;
 }
 
-static void	parse_flag(char *flag, t_bench *bench, int *dif, int *bflag)
+static int	parse_flag(char *flag, t_bench *bench, int *dif, int *bflag)
 {
 	int	matched;
 
@@ -43,15 +43,14 @@ static void	parse_flag(char *flag, t_bench *bench, int *dif, int *bflag)
 		(*bflag)++;
 		bench->enabled = 1;
 	}
-	else if (!ft_strncmp(flag, "--count-only", 42))
-		bench->print = 0;
 	else
-		write_error();
+		return (0);
 	if (*dif > 1 || *bflag > 1)
-		write_error();
+		return (0);
+	return (1);
 }
 
-static void	check_dups(int i, int argc, char **argv)
+static int	check_dups(int i, int argc, char **argv)
 {
 	int	j;
 
@@ -61,13 +60,14 @@ static void	check_dups(int i, int argc, char **argv)
 		if (argv[j][0] == '-' && argv[j][1] == '-' && ft_isalpha(argv[j][2]))
 			continue ;
 		if (!ft_str_is_num(argv[j]))
-			write_error();
+			return (0);
 		if (ft_atoi_mod(argv[i]) == ft_atoi_mod(argv[j]))
-			write_error();
+			return (0);
 	}
+	return (1);
 }
 
-void	ft_argv_checker(int argc, char **argv, t_bench *bench)
+int	ft_argv_checker(int argc, char **argv, t_bench *bench)
 {
 	int	i;
 	int	dif_flag;
@@ -79,14 +79,19 @@ void	ft_argv_checker(int argc, char **argv, t_bench *bench)
 	while (i++ < (argc - 1))
 	{
 		if (argv[i][0] == '-' && argv[i][1] == '-' && ft_isalpha(argv[i][2]))
-			parse_flag(argv[i], bench, &dif_flag, &bench_flag);
+		{
+			if (!parse_flag(argv[i], bench, &dif_flag, &bench_flag))
+				return (0);
+		}
 		else
 		{
 			if (!ft_str_is_num(argv[i]))
-				write_error();
-			check_dups(i, argc, argv);
+				return (0);
+			if (!check_dups(i, argc, argv))
+				return (0);
 		}
 	}
+	return (1);
 }
 
 static int	ft_str_is_num(char *str)
